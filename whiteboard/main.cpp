@@ -1,6 +1,6 @@
 #include <iostream>
-#include "socket.cpp"
-#include <thread>
+
+#include "BaseMode.cpp"
 
 using namespace std;
 
@@ -16,17 +16,36 @@ std::vector<sf::Vertex> Client::lines = std::vector<sf::Vertex>();
 
 int main(int argc, char *argv[])
 {
-    if (strcmp(argv[1], "server") == 0)
+    try
     {
-        std::cout << "Server STARTED" << '\n';
-        Server test;
-        test.connection();
+        BaseMode *mode;
+        if (strcmp(argv[1], "server") == 0)
+        {
+            mode = new ServerMode();
+        }
+        else if (strcmp(argv[1], "client") == 0)
+        {
+            mode = new ClientMode();
+        }
+        else
+        {
+            throw 1438;
+        }
+
+        if (dynamic_cast<ServerMode *>(mode))
+        {
+            cout << "Se porneste serverul on port 1438..." << '\n';
+        }
+        else
+        {
+            cout << "Client deschis." << '\n';
+        }
+
+        mode->run();
     }
-    else if (strcmp(argv[1], "client") == 0)
+    catch (int e)
     {
-        std::cout << "Client launched" << '\n';
-        Client test;
-        test.run();
+        std::cout << "Not a valid argv[1]" << '\n';
     }
 
     return 0;
