@@ -30,13 +30,15 @@
     };
     ```
 
-- [ ] Operatori (minim 4 * numărul oamenilor din echipa)
+- [x] Operatori (minim 4 * numărul oamenilor din echipa)
 
     ```cpp
     // whiteboard/BaseMode.cpp
     bool operator==(int x)
     friend std::istream &operator>>(std::istream &in, Input &input)
     friend std::ostream &operator<<(std::ostream &out, const Input &input)
+    // whiteboard/Client.cpp
+    void Client::operator++()
     ```
 
 - [x] Heap Memory Allocation

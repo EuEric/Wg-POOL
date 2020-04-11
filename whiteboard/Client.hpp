@@ -30,5 +30,7 @@ public:
 
     static void emit(sf::Vertex);
 
+    void operator++();
+
     void run();
 };

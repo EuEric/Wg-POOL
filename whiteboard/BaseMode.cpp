@@ -25,7 +25,7 @@ public:
     void run()
     {
         Client test;
-        test.run();
+        ++test;
     }
 };
 

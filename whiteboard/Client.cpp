@@ -43,3 +43,8 @@ void Client::run()
     std::unique_ptr<Whiteboard<800, 600>> window(new Whiteboard<800, 600>());
     window->startClient(lines, emit);
 }
+
+void Client::operator++()
+{
+    run();
+}
