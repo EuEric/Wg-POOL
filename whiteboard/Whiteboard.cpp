@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <functional>
@@ -11,7 +13,7 @@ public:
         static sf::Texture texture;
         static sf::Sprite sprite;
 
-        sf::RenderWindow window(sf::VideoMode(X, Y), "My window");
+        sf::RenderWindow window(sf::VideoMode(X, Y), "My whiteboard");
 
         texture.create(X, Y);
 

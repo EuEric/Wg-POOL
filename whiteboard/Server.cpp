@@ -9,7 +9,7 @@ Server::Server()
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = htonl(INADDR_ANY);
-    address.sin_port = htons(Port);
+    address.sin_port = htons(ATC::port);
 
     if (bind(server_fd, (sockaddr *)&address, sizeof(address)) < 0)
     {

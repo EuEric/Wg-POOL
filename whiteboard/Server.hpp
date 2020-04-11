@@ -13,10 +13,11 @@
 #include <SFML/Graphics.hpp>
 #include <arpa/inet.h>
 
+#include "ATC.cpp"
+
 class Server
 {
 private:
-    static const int Port = 1438;
     sockaddr_in address;
     int server_fd;
     bool dataToBeSend;

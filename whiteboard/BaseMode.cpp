@@ -35,6 +35,11 @@ private:
     int port;
     bool mode; // 1 - Server, 0 - Client
 public:
+    int getPort()
+    {
+        return port;
+    }
+
     bool operator==(int x)
     {
         if (mode == true && x > 0)

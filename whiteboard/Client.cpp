@@ -8,7 +8,7 @@ Client::Client()
     }
 
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(Port);
+    serv_addr.sin_port = htons(ATC::port);
 
     if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0)
     {
@@ -40,6 +40,6 @@ void Client::run()
 {
     std::thread(recive_smth).detach();
 
-    Whiteboard<800, 600> *window = new Whiteboard<800, 600>();
+    std::unique_ptr<Whiteboard<800, 600>> window(new Whiteboard<800, 600>());
     window->startClient(lines, emit);
 }

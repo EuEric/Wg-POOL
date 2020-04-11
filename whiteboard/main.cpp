@@ -2,14 +2,15 @@
 #include <string>
 
 #include "BaseMode.cpp"
+#include "ATC.cpp"
 
 using namespace std;
+
+int ATC::port = int();
 
 Server *Server::pInstance = NULL;
 
 int Client::sock = int();
-// sf::Texture Client::texture = sf::Texture();
-// sf::Sprite Client::sprite = sf::Sprite();
 std::vector<sf::Vertex> Client::lines = std::vector<sf::Vertex>();
 
 int main(int argc, char *argv[])
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     Input input;
 
     cin >> input;
+    ATC::port = input.getPort();
 
     if (input == 1)
     {
