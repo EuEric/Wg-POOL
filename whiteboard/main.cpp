@@ -1,52 +1,39 @@
 #include <iostream>
+#include <string>
 
 #include "BaseMode.cpp"
 
 using namespace std;
 
-std::vector<int> Server::poolClients = std::vector<int>();
-bool Server::dataToBeSend = false;
-std::string Server::s = std::string();
-sf::Texture Server::currentTexture = sf::Texture();
+Server *Server::pInstance = NULL;
 
 int Client::sock = int();
-sf::Texture Client::texture = sf::Texture();
-sf::Sprite Client::sprite = sf::Sprite();
+// sf::Texture Client::texture = sf::Texture();
+// sf::Sprite Client::sprite = sf::Sprite();
 std::vector<sf::Vertex> Client::lines = std::vector<sf::Vertex>();
 
 int main(int argc, char *argv[])
 {
-    try
-    {
-        BaseMode *mode;
-        if (strcmp(argv[1], "server") == 0)
-        {
-            mode = new ServerMode();
-        }
-        else if (strcmp(argv[1], "client") == 0)
-        {
-            mode = new ClientMode();
-        }
-        else
-        {
-            throw 1438;
-        }
+    BaseMode *mode;
+    Input input;
 
-        if (dynamic_cast<ServerMode *>(mode))
-        {
-            cout << "Se porneste serverul on port 1438..." << '\n';
-        }
-        else
-        {
-            cout << "Client deschis." << '\n';
-        }
+    cin >> input;
 
-        mode->run();
-    }
-    catch (int e)
+    if (input == 1)
     {
-        std::cout << "Not a valid argv[1]" << '\n';
+        mode = new ServerMode();
     }
+    else
+    {
+        mode = new ClientMode();
+    }
+
+    auto getMode = [](BaseMode *mode) -> string {
+        return (dynamic_cast<ServerMode *>(mode) ? "Se porneste serverul on port " : "Client deschis. Connecting on port ");
+    };
+
+    cout << getMode(mode) << input << "...\n";
+    mode->run();
 
     return 0;
 }

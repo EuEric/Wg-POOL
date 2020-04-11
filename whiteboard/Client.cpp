@@ -40,45 +40,6 @@ void Client::run()
 {
     std::thread(recive_smth).detach();
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
-
-    texture.create(800, 600);
-
-    int mousedown = 0;
-    window.setFramerateLimit(30);
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            else if ((event.type == sf::Event::MouseMoved) && (mousedown == 1))
-            {
-                lines.push_back(sf::Vertex(sf::Vector2f(sf::Mouse::getPosition(window))));
-                Client::emit(sf::Vector2f(sf::Mouse::getPosition(window)));
-            }
-            else if (event.type == sf::Event::MouseButtonPressed)
-            {
-                mousedown = 1;
-            }
-            else if (event.type == sf::Event::MouseButtonReleased)
-            {
-                mousedown = 0;
-                texture.update(window);
-                lines.clear();
-            }
-        }
-
-        window.clear(sf::Color::Green);
-
-        window.draw(sprite);
-
-        window.draw(&lines[0], lines.size(), sf::LinesStrip);
-
-        sprite.setTexture(texture);
-
-        window.display();
-    }
+    Whiteboard<800, 600> *window = new Whiteboard<800, 600>();
+    window->startClient(lines, emit);
 }

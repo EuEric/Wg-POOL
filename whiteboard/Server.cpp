@@ -37,7 +37,7 @@ void Server::connection_thread(int new_socket)
     {
         sf::Vertex foo;
         int valread = read(new_socket, &foo, sizeof(foo));
-        Server::server_speaks(foo, new_socket);
+        Instance()->server_speaks(foo, new_socket);
     }
 }
 
@@ -58,4 +58,14 @@ void Server::connection()
 
         poolClients.push_back(new_socket);
     }
+}
+
+Server *Server::Instance()
+{
+    if (!pInstance)
+    {
+        pInstance = new Server;
+    }
+
+    return pInstance;
 }

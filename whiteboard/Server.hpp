@@ -19,17 +19,16 @@ private:
     static const int Port = 1438;
     sockaddr_in address;
     int server_fd;
-    static bool dataToBeSend;
-    static std::string s;
-    static std::vector<int> poolClients;
-    static sf::Texture currentTexture;
-
-public:
+    bool dataToBeSend;
+    std::string s;
+    std::vector<int> poolClients;
+    sf::Texture currentTexture;
+    static Server *pInstance;
     Server();
-
-    static void server_speaks(sf::Vertex, int);
-
+    void server_speaks(sf::Vertex, int);
     static void connection_thread(int);
 
+public:
     void connection();
+    static Server *Instance();
 };

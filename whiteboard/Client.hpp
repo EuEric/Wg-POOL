@@ -13,14 +13,16 @@
 #include <SFML/Graphics.hpp>
 #include <arpa/inet.h>
 
+#include "Whiteboard.cpp"
+
 class Client
 {
 private:
     static const int Port = 1438;
     sockaddr_in serv_addr;
     static int sock;
-    static sf::Texture texture;
-    static sf::Sprite sprite;
+    // static sf::Texture texture;
+    // static sf::Sprite sprite;
     static std::vector<sf::Vertex> lines;
 
 public:
