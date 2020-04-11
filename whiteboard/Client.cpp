@@ -40,7 +40,7 @@ void Client::run()
 {
     std::thread(recive_smth).detach();
 
-    std::unique_ptr<Whiteboard<800, 600>> window(new Whiteboard<800, 600>());
+    std::unique_ptr<Whiteboard<400, 400>> window(new Whiteboard<400, 400>());
     window->startClient(lines, emit);
 }
 

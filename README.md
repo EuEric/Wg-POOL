@@ -1,5 +1,7 @@
 # Wg-POOL
 
+![](demo.gif)
+
 ## Cerințe obligatorii:
 
 - [x] Interfața grafica (în SDL, SFML, Qt, etc) cu API pentru C++
