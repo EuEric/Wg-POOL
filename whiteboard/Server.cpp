@@ -1,5 +1,7 @@
 #include "Server.hpp"
 
+Server *Server::pInstance = nullptr;
+
 Server::Server()
 {
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -9,7 +11,7 @@ Server::Server()
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = htonl(INADDR_ANY);
-    address.sin_port = htons(ATC::port);
+    address.sin_port = htons(ATC::Port);
 
     if (bind(server_fd, (sockaddr *)&address, sizeof(address)) < 0)
     {

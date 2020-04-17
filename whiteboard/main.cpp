@@ -1,17 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include "BaseMode.cpp"
-#include "ATC.cpp"
+#include "BaseMode.hpp"
+#include "ATC.hpp"
 
 using namespace std;
-
-int ATC::port = int();
-
-Server *Server::pInstance = NULL;
-
-int Client::sock = int();
-std::vector<sf::Vertex> Client::lines = std::vector<sf::Vertex>();
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +12,7 @@ int main(int argc, char *argv[])
     Input input;
 
     cin >> input;
-    ATC::port = input.getPort();
+    ATC::Port = input.getPort();
 
     if (input == 1)
     {

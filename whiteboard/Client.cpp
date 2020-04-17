@@ -1,5 +1,8 @@
 #include "Client.hpp"
 
+int Client::sock = int();
+std::vector<sf::Vertex> Client::lines = std::vector<sf::Vertex>();
+
 Client::Client()
 {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -8,9 +11,9 @@ Client::Client()
     }
 
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(ATC::port);
+    serv_addr.sin_port = htons(ATC::Port);
 
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0)
+    if (inet_pton(AF_INET, ATC::IP_Server.c_str(), &serv_addr.sin_addr) <= 0)
     {
         printf("\nInvalid address/ Address not supported \n");
     }
@@ -40,7 +43,7 @@ void Client::run()
 {
     std::thread(recive_smth).detach();
 
-    std::unique_ptr<Whiteboard<400, 400>> window(new Whiteboard<400, 400>());
+    std::unique_ptr<Whiteboard<ATC::WindowSizeX, ATC::WindowSizeY>> window(new Whiteboard<ATC::WindowSizeX, ATC::WindowSizeY>());
     window->startClient(lines, emit);
 }
 

@@ -13,8 +13,8 @@
 #include <SFML/Graphics.hpp>
 #include <arpa/inet.h>
 
-#include "Whiteboard.cpp"
-#include "ATC.cpp"
+#include "ATC.hpp"
+#include "Whiteboard.hpp"
 
 class Client
 {

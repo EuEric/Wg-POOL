@@ -10,8 +10,8 @@ class Whiteboard
 public:
     void startClient(std::vector<sf::Vertex> &lines, std::function<void(sf::Vertex)> emit)
     {
-        static sf::Texture texture;
-        static sf::Sprite sprite;
+        sf::Texture texture;
+        sf::Sprite sprite;
 
         sf::RenderWindow window(sf::VideoMode(X, Y), "My whiteboard");
 

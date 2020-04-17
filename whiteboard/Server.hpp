@@ -13,7 +13,7 @@
 #include <SFML/Graphics.hpp>
 #include <arpa/inet.h>
 
-#include "ATC.cpp"
+#include "ATC.hpp"
 
 class Server
 {
@@ -30,6 +30,8 @@ private:
     static void connection_thread(int);
 
 public:
+    Server(Server const &) = delete;
+    void operator=(Server const &) = delete;
     void connection();
     static Server *Instance();
 };

@@ -1,106 +1,81 @@
-#pragma once
+#include "BaseMode.hpp"
 
-#include <iostream>
-#include "Client.hpp"
-#include "Server.hpp"
-
-class BaseMode
+void ServerMode::run()
 {
-public:
-    virtual void run() = 0;
-};
+    Server::Instance()->connection();
+}
 
-class ServerMode : public BaseMode
+void ClientMode::run()
 {
-public:
-    void run()
+    Client test;
+    ++test;
+}
+
+int Input::getPort()
+{
+    return port;
+}
+
+bool Input::operator==(int x)
+{
+    if (mode == true && x > 0)
     {
-        Server::Instance()->connection();
+        return true;
     }
-};
+    return false;
+}
 
-class ClientMode : public BaseMode
+std::istream &operator>>(std::istream &in, Input &input)
 {
-public:
-    void run()
+    bool error = false;
+    do
     {
-        Client test;
-        ++test;
-    }
-};
-
-class Input
-{
-private:
-    int port;
-    bool mode; // 1 - Server, 0 - Client
-public:
-    int getPort()
-    {
-        return port;
-    }
-
-    bool operator==(int x)
-    {
-        if (mode == true && x > 0)
+        error = false;
+        try
         {
-            return true;
+            std::cout << "Port: ";
+            std::string inputPort;
+            in >> inputPort;
+            input.port = std::stoi(inputPort);
+
+            std::cout << "server / client: ";
+            std::string inputMode;
+            in >> inputMode;
+            if (inputMode == "server")
+            {
+                input.mode = 1;
+            }
+            else if (inputMode == "client")
+            {
+                input.mode = 0;
+            }
+            else
+            {
+                throw static_cast<std::string_view>("Invalid mode.");
+            }
         }
-        return false;
-    }
-
-    friend std::istream &operator>>(std::istream &in, Input &input)
-    {
-        bool error = false;
-        do
+        catch (std::string_view err)
         {
-            error = false;
-            try
-            {
-                std::cout << "Port: ";
-                std::string inputPort;
-                in >> inputPort;
-                input.port = std::stoi(inputPort);
+            error = true;
+            std::cout << err << '\n';
+        }
+        catch (std::invalid_argument const &e)
+        {
+            error = true;
+            std::cout << "Bad input: std::invalid_argument thrown" << '\n';
+        }
+        catch (std::out_of_range const &e)
+        {
+            error = true;
+            std::cout << "Integer overflow: std::out_of_range thrown" << '\n';
+        }
+    } while (error == true);
 
-                std::cout << "server / client: ";
-                std::string inputMode;
-                in >> inputMode;
-                if (inputMode == "server")
-                {
-                    input.mode = 1;
-                }
-                else if (inputMode == "client")
-                {
-                    input.mode = 0;
-                }
-                else
-                {
-                    throw static_cast<std::string_view>("Invalid mode.");
-                }
-            }
-            catch (std::string_view err)
-            {
-                error = true;
-                std::cout << err << '\n';
-            }
-            catch (std::invalid_argument const &e)
-            {
-                error = true;
-                std::cout << "Bad input: std::invalid_argument thrown" << '\n';
-            }
-            catch (std::out_of_range const &e)
-            {
-                error = true;
-                std::cout << "Integer overflow: std::out_of_range thrown" << '\n';
-            }
-        } while (error == true);
+    return in;
+}
 
-        return in;
-    }
-
-    friend std::ostream &operator<<(std::ostream &out, const Input &input)
-    {
-        out << input.port;
-        return out;
-    }
-};
+std::ostream &operator<<(std::ostream &out, const Input &input)
+{
+    out << input.port;
+    return out;
+}
