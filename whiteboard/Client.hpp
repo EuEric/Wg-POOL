@@ -33,4 +33,6 @@ public:
     void operator++();
 
     void run();
+
+    ~Client();
 };

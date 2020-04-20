@@ -51,3 +51,11 @@ void Client::operator++()
 {
     run();
 }
+
+Client::~Client()
+{
+    sf::Vertex foo;
+    foo.color = sf::Color::Red;
+    emit(foo);
+    std::cout << "S-a apelat Client Destructor." << '\n';
+}

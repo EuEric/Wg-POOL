@@ -12,6 +12,7 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 #include <arpa/inet.h>
+#include <algorithm>
 
 #include "ATC.hpp"
 
@@ -27,6 +28,7 @@ private:
     static Server *pInstance;
     Server();
     void server_speaks(sf::Vertex, int);
+    void kill_him(int);
     static void connection_thread(int);
 
 public:
@@ -34,4 +36,5 @@ public:
     void operator=(Server const &) = delete;
     void connection();
     static Server *Instance();
+    ~Server();
 };

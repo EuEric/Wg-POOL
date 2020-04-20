@@ -18,7 +18,7 @@ Server::Server()
         std::cout << "Cannot bind socket." << '\n';
     }
 
-    if (listen(server_fd, 3) < 0)
+    if (listen(server_fd, 10) < 0)
     {
         std::cout << "nuj ce face listen si backlog" << '\n';
     }
@@ -33,14 +33,33 @@ void Server::server_speaks(sf::Vertex foo, int without)
     }
 }
 
+void Server::kill_him(int new_socket)
+{
+
+    for (int i = 0; i < poolClients.size(); i++)
+    {
+        if (poolClients[i] == new_socket)
+        {
+            std::swap(poolClients[i], poolClients[poolClients.size() - 1]);
+        }
+    }
+    poolClients.pop_back();
+}
+
 void Server::connection_thread(int new_socket)
 {
     while (true)
     {
         sf::Vertex foo;
         int valread = read(new_socket, &foo, sizeof(foo));
+        if (foo.color == sf::Color::Red)
+        {
+            Instance()->kill_him(new_socket);
+            break;
+        }
         Instance()->server_speaks(foo, new_socket);
     }
+    std::cout << "A iesit " << new_socket << '\n';
 }
 
 void Server::connection()
@@ -70,4 +89,11 @@ Server *Server::Instance()
     }
 
     return pInstance;
+}
+
+Server::~Server()
+{
+    delete pInstance;
+    int rc = close(server_fd);
+    std::cout << "Pa pa server " << rc << "." << '\n';
 }
