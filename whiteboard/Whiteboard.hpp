@@ -54,7 +54,7 @@ public:
                 lines.clear();
             }
 
-            window.clear(sf::Color::Green);
+            window.clear(sf::Color(82, 49, 120));
 
             window.draw(sprite);
 
