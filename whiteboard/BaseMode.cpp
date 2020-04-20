@@ -7,8 +7,8 @@ void ServerMode::run()
 
 void ClientMode::run()
 {
-    Client test;
-    ++test;
+    Client client;
+    ++client;
 }
 
 int Input::getPort()

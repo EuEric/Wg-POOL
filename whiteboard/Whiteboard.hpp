@@ -41,7 +41,17 @@ public:
                     mousedown = 0;
                     texture.update(window);
                     lines.clear();
+
+                    sf::Vertex foo;
+                    foo.color = sf::Color::Blue;
+                    emit(foo);
                 }
+            }
+
+            if (lines.size() > 0 && lines[lines.size() - 1].color == sf::Color::Blue)
+            {
+                texture.update(window);
+                lines.clear();
             }
 
             window.clear(sf::Color::Green);

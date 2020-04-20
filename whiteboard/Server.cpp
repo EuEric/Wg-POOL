@@ -41,6 +41,7 @@ void Server::kill_him(int new_socket)
         if (poolClients[i] == new_socket)
         {
             std::swap(poolClients[i], poolClients[poolClients.size() - 1]);
+            break;
         }
     }
     poolClients.pop_back();
@@ -64,7 +65,6 @@ void Server::connection_thread(int new_socket)
 
 void Server::connection()
 {
-
     while (true)
     {
         int new_socket, addrlen;
@@ -93,7 +93,6 @@ Server *Server::Instance()
 
 Server::~Server()
 {
-    delete pInstance;
     int rc = close(server_fd);
     std::cout << "Pa pa server " << rc << "." << '\n';
 }
