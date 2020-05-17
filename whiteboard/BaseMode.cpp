@@ -3,6 +3,7 @@
 void ServerMode::run()
 {
     Server::Instance()->connection();
+    Server::ResetInstance();
 }
 
 void ClientMode::run()
@@ -51,23 +52,18 @@ std::istream &operator>>(std::istream &in, Input &input)
             }
             else
             {
-                throw static_cast<std::string_view>("Invalid mode.");
+                throw MyException();
             }
         }
-        catch (std::string_view err)
+        catch (MyException &e)
         {
             error = true;
-            std::cout << err << '\n';
+            std::cout << e.what() << '\n';
         }
-        catch (std::invalid_argument const &e)
+        catch (std::exception &e)
         {
             error = true;
-            std::cout << "Bad input: std::invalid_argument thrown" << '\n';
-        }
-        catch (std::out_of_range const &e)
-        {
-            error = true;
-            std::cout << "Integer overflow: std::out_of_range thrown" << '\n';
+            std::cout << e.what() << '\n';
         }
     } while (error == true);
 

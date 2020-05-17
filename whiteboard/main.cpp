@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 
     cout << getMode(mode) << input << "...\n";
     mode->run();
+    delete mode;
 
     return 0;
 }

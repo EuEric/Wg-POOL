@@ -36,5 +36,6 @@ public:
     void operator=(Server const &) = delete;
     void connection();
     static Server *Instance();
+    static void ResetInstance();
     ~Server();
 };

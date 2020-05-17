@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+
+#include "MyException.hpp"
 #include "Client.hpp"
 #include "Server.hpp"
 

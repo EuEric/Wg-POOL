@@ -67,8 +67,8 @@ void Server::connection()
 {
     while (true)
     {
-        int new_socket, addrlen;
-        if ((new_socket = accept(server_fd, (sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
+        int new_socket;
+        if (int addrlen; (new_socket = accept(server_fd, (sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
         {
             std::cout << "Eroare la acceptare" << '\n';
         }
@@ -78,6 +78,11 @@ void Server::connection()
         std::cout << "New connection on socket: " << new_socket << '\n';
 
         poolClients.push_back(new_socket);
+
+        if (poolClients.size() == 4)
+        {
+            break;
+        }
     }
 }
 
@@ -91,8 +96,14 @@ Server *Server::Instance()
     return pInstance;
 }
 
+void Server::ResetInstance()
+{
+    delete pInstance;
+    pInstance = NULL;
+}
+
 Server::~Server()
 {
     int rc = close(server_fd);
-    std::cout << "Pa pa server " << rc << "." << '\n';
+    std::cout << "Pa pa server. rc = " << rc << "." << '\n';
 }

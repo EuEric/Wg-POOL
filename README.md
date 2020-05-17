@@ -97,10 +97,11 @@
     std::unique_ptr<Whiteboard<800, 600>> window(new Whiteboard<800, 600>());
     ```
 
-- [ ] Design patterns (minim 2 * numărul oamenilor din echipa)
+- [x] Design patterns (minim 2 * numărul oamenilor din echipa)
     * https://en.wikipedia.org/wiki/Facade_pattern
     * http://www.yolinux.com/TUTORIALS/C++Singleton.html
     * https://sourcemaking.com/design_patterns
+    * https://refactoring.guru/design-patterns/mediator
 
     ```cpp
     // whiteboard/Server.cpp - Singleton
@@ -110,15 +111,16 @@
       }
       return pInstance;
     }
+    // whiteboard/ATC.hpp - Mediator
     ```
 
 - [x] Features of C++17/20 (constexpr, consteval, constinit, fold expressions, init statement for if/switch, etc) (minim 1 / proiect)
     * https://github.com/AnthonyCalandra/modern-cpp-features 
-    * https://skebanga.github.io/string-view/
+    * https://skebanga.gith\ub.io/string-view/
 
     ```cpp
-    // whiteboard/BaseMode.cpp
-    std::string_view err
+    // whiteboard/Server.cpp
+    if (int addrlen; (new_socket = accept(server_fd, (sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
     ```
   
 ## Opțional:
